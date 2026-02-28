@@ -2,40 +2,277 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>《钦天监秘要：QGIS盘古大陆灾害推演与应急策论》 - 基于QGIS的空间分析实战教程</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钦天监秘要 - 山河社稷图导航</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #333; }
-        .chapter-list { list-style-type: none; padding: 0; }
-        .chapter-list li { margin: 10px 0; }
-        .chapter-list a { 
-            text-decoration: none; 
-            color: #0366d6; 
-            font-size: 18px;
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .chapter-list a:hover { text-decoration: underline; }
+        
+        body {
+            font-family: "SimSun", "宋体", serif;
+            background: #0a0a1a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0a1a"/><path d="M0,50 Q25,30 50,50 T100,50" stroke="%231a1a3a" fill="none" stroke-width="0.5"/><path d="M0,70 Q25,50 50,70 T100,70" stroke="%231a1a3a" fill="none" stroke-width="0.5"/><path d="M0,30 Q25,10 50,30 T100,30" stroke="%231a1a3a" fill="none" stroke-width="0.5"/></svg>');
+            color: #e0d0a0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        /* 卷轴容器 */
+        .scroll-container {
+            max-width: 1200px;
+            width: 100%;
+            background: linear-gradient(to right, #1a0f0f, #2a1a1a, #1a0f0f);
+            border: 15px solid transparent;
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%23552a2a"/><path d="M0,0 L50,0 L50,50 L0,50 Z" fill="none" stroke="%23b8941f" stroke-width="2"/></svg>') 30 round;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        /* 卷轴上下装饰 */
+        .scroll-container::before, .scroll-container::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,0 50,10 T100,10" fill="%23552a2a" stroke="%23b8941f" stroke-width="1"/></svg>') repeat-x;
+        }
+        
+        .scroll-container::before {
+            top: -20px;
+        }
+        
+        .scroll-container::after {
+            bottom: -20px;
+            transform: rotate(180deg);
+        }
+        
+        /* 标题样式 */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #b8941f, transparent);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #e8c35d;
+            text-shadow: 0 0 10px rgba(232, 195, 93, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #c0a86d;
+            font-style: italic;
+        }
+        
+        /* 章节导航区域 */
+        .chapters {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .chapter-card {
+            background: linear-gradient(145deg, #1a1510, #2a2015);
+            border: 1px solid #5d4a2a;
+            border-radius: 5px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .chapter-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #b8941f, #e8c35d, #b8941f);
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: #e8c35d;
+        }
+        
+        .chapter-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #b8941f;
+            color: #1a1510;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .chapter-title {
+            font-size: 1.4rem;
+            color: #e8c35d;
+            margin-bottom: 10px;
+            padding-right: 40px;
+        }
+        
+        .chapter-description {
+            font-size: 0.95rem;
+            color: #c0a86d;
+            line-height: 1.5;
+        }
+        
+        /* 底部信息 */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #8a7a5a;
+            border-top: 1px solid #3a2a1a;
+            padding-top: 20px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .scroll-container {
+                padding: 20px;
+                margin-top: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .chapters {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 印章效果 */
+        .seal {
+            position: absolute;
+            bottom: -30px;
+            right: 30px;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%23a52a2a" stroke-width="8"/><text x="50" y="55" text-anchor="middle" fill="%23a52a2a" font-family="SimSun" font-size="14" font-weight="bold">钦天监秘要</text></svg>') no-repeat center;
+            opacity: 0.7;
+            transform: rotate(15deg);
+        }
     </style>
 </head>
 <body>
-    <h1>《钦天监秘要：QGIS盘古大陆灾害推演与应急策论》 - 基于QGIS的空间分析实战教程</h1>
-    <p>课程核心设定：
-      平行宇宙中的地球，存在一个以中国古代神话命名的“盘古大陆。我们的课程，期望通过“盘古大陆”的奇幻叙事，将枯燥的技术操作转化为一场充满使命感的冒险，能极大激发学员的学习兴趣和代入感，使36学时的学习过程如同一场精彩的策略游戏。<br>
-      •同学身份： 轩辕国“钦天监”新任策士，或洛川府新任幕僚。<br>
-      •核心使命： 运用上古神器“山河社稷图”（即QGIS）的推演之力，辅佐洛川府应对即将到来的天灾——“共工之怒”（一种设定中周期性发生的超级台风/洪水灾害）。<br>
-      •故事线： 从星象示警（风险识别），到筑城修坝（准备），再到灾中驰援（响应），最后是灾后重建（恢复），完整模拟一次灾害管理全周期。<br></p>
-    
-    <h2>章节列表</h2>
-    <ul class="chapter-list">
-        <!-- 每次添加新章节时，就在这里添加一行 -->
-        <li><a href="chapter1.html">第一章：数据导入与清洗</a></li>
-        <li><a href="chapter2.html">第二章：数据可视化基础</a></li>
-        <li><a href="chapter3.html">第三章：统计分析方法</a></li>
-        <!-- 添加更多章节... -->
-    </ul>
-    
-    <footer>
-        <p>最后更新: 2024年1月</p>
-    </footer>
+    <div class="scroll-container">
+        <div class="header">
+            <h1>钦天监秘要</h1>
+            <div class="subtitle">QGIS盘古大陆灾害推演与应急策论</div>
+        </div>
+        
+        <div class="intro">
+            <p>平行宇宙中的地球，存在一个以中国古代神话命名的"盘古大陆"。本课程通过"盘古大陆"的奇幻叙事，将技术操作转化为一场充满使命感的冒险。</p>
+            <p><strong>您的身份：</strong> 轩辕国"钦天监"新任策士，或洛川府新任幕僚。</p>
+            <p><strong>核心使命：</strong> 运用上古神器"山河社稷图"（即QGIS）的推演之力，辅佐洛川府应对即将到来的天灾——"共工之怒"。</p>
+        </div>
+        
+        <div class="chapters">
+            <div class="chapter-card" onclick="location.href='chapter1.html'">
+                <div class="chapter-number">一</div>
+                <div class="chapter-title">星象示警：风险识别</div>
+                <div class="chapter-description">学习使用QGIS基础功能，识别盘古大陆的地形地貌与潜在灾害风险区域，解读天象预示的危机。</div>
+            </div>
+            
+            <div class="chapter-card" onclick="location.href='chapter2.html'">
+                <div class="chapter-number">二</div>
+                <div class="chapter-title">筑城修坝：防灾准备</div>
+                <div class="chapter-description">掌握QGIS空间分析工具，规划洛川府防御工事，为"共工之怒"做准备。</div>
+            </div>
+            
+            <div class="chapter-card" onclick="location.href='chapter3.html'">
+                <div class="chapter-number">三</div>
+                <div class="chapter-title">灾中驰援：应急响应</div>
+                <div class="chapter-description">运用QGIS网络分析与路径规划，制定最优救援路线，在灾害中高效调度资源。</div>
+            </div>
+            
+            <div class="chapter-card" onclick="location.href='chapter4.html'">
+                <div class="chapter-number">四</div>
+                <div class="chapter-title">灾后重建：恢复评估</div>
+                <div class="chapter-description">通过QGIS空间统计与变化检测，评估灾害损失，制定科学的重建计划。</div>
+            </div>
+            
+            <div class="chapter-card" onclick="location.href='chapter5.html'">
+                <div class="chapter-number">五</div>
+                <div class="chapter-title">神器进阶：高级推演</div>
+                <div class="chapter-description">探索QGIS三维分析与模型构建，掌握更精准的灾害预测与推演技术。</div>
+            </div>
+            
+            <div class="chapter-card" onclick="location.href='chapter6.html'">
+                <div class="chapter-number">六</div>
+                <div class="chapter-title">天机秘术：数据可视化</div>
+                <div class="chapter-description">学习制作专业地图与交互式可视化，将分析结果转化为直观的决策支持工具。</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>轩辕国钦天监 · 洛川府幕僚培训课程 · 山河社稷图推演系统</p>
+            <p>共工之怒预警等级：乙级 · 当前推演进度：初阶</p>
+        </div>
+        
+        <div class="seal"></div>
+    </div>
+
+    <script>
+        // 为章节卡片添加点击效果
+        document.querySelectorAll('.chapter-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+        
+        // 添加页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.scroll-container').style.opacity = '0';
+            document.querySelector('.scroll-container').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.querySelector('.scroll-container').style.transition = 'all 0.8s ease';
+                document.querySelector('.scroll-container').style.opacity = '1';
+                document.querySelector('.scroll-container').style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
 </body>
 </html>
-
