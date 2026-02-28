@@ -3,447 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>钦天监秘要：QGIS盘古大陆灾害推演与应急策论</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>钦天监秘要 - 山河社稷图导航</title>
     <style>
+        /* 全局样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'SimSun', '宋体', serif;
         }
         
         body {
-            background: linear-gradient(to bottom, #f5e8c8, #e8d9b0);
-            color: #3a2615;
+            font-family: "SimSun", "宋体", serif;
+            background: #0a0a1a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0a1a"/><path d="M0,50 Q25,30 50,50 T100,50" stroke="%231a1a3a" fill="none" stroke-width="0.5"/><path d="M0,70 Q25,50 50,70 T100,70" stroke="%231a1a3a" fill="none" stroke-width="0.5"/><path d="M0,30 Q25,10 50,30 T100,30" stroke="%231a1a3a" fill="none" stroke-width="0.5"/></svg>');
+            color: #e0d0a0;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1"><rect fill="none" stroke="%23333" stroke-width="2" x="10" y="10" width="80" height="80"/></svg>');
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* 卷轴样式 */
+        /* 卷轴容器 */
         .scroll-container {
-            background: #f9f3e5;
-            border: 15px solid #8b4513;
-            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><rect fill="%238b4513" width="50" height="50"/><path fill="%23d2b48c" d="M10,10 L40,10 L40,40 L10,40 Z"/></svg>') 30 round;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            padding: 40px 30px;
+            max-width: 1200px;
+            width: 100%;
+            background: linear-gradient(to right, #1a0f0f, #2a1a1a, #1a0f0f);
+            border: 15px solid transparent;
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><rect width="50" height="50" fill="%23552a2a"/><path d="M0,0 L50,0 L50,50 L0,50 Z" fill="none" stroke="%23b8941f" stroke-width="2"/></svg>') 30 round;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            padding: 40px;
             position: relative;
-            margin-bottom: 40px;
+            margin-top: 40px;
         }
         
+        /* 卷轴上下装饰 */
         .scroll-container::before, .scroll-container::after {
             content: "";
             position: absolute;
-            width: 30px;
-            height: 100%;
-            top: 0;
-            background: #8b4513;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,0 50,10 T100,10" fill="%23552a2a" stroke="%23b8941f" stroke-width="1"/></svg>') repeat-x;
         }
         
         .scroll-container::before {
-            left: -30px;
-            border-radius: 10px 0 0 10px;
+            top: -20px;
         }
         
         .scroll-container::after {
-            right: -30px;
-            border-radius: 0 10px 10px 0;
+            bottom: -20px;
+            transform: rotate(180deg);
         }
         
         /* 标题样式 */
         .header {
             text-align: center;
             margin-bottom: 40px;
-            border-bottom: 2px solid #8b4513;
+            position: relative;
             padding-bottom: 20px;
         }
         
-        .main-title {
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #b8941f, transparent);
+        }
+        
+        h1 {
             font-size: 2.8rem;
-            color: #8b2200;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: #e8c35d;
+            text-shadow: 0 0 10px rgba(232, 195, 93, 0.5);
             margin-bottom: 10px;
             letter-spacing: 5px;
         }
         
         .subtitle {
-            font-size: 1.5rem;
-            color: #5d4037;
+            font-size: 1.2rem;
+            color: #c0a86d;
             font-style: italic;
-            margin-bottom: 15px;
         }
         
-        .core-mission {
-            background: #e8d9b0;
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 5px solid #8b4513;
-            margin-top: 20px;
-        }
-        
-        /* 卷章导航 */
-        .chapter-nav {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .nav-btn {
-            background: #8b4513;
-            color: #f9f3e5;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-        
-        .nav-btn:hover, .nav-btn.active {
-            background: #5d2906;
-            transform: translateY(-2px);
-        }
-        
-        /* 卡片容器 */
-        .cards-container {
+        /* 章节导航区域 */
+        .chapters {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         
-        /* 卡片样式 */
-        .card {
-            background: #f9f3e5;
-            border: 2px solid #8b4513;
-            border-radius: 8px;
+        .chapter-card {
+            background: linear-gradient(145deg, #1a1510, #2a2015);
+            border: 1px solid #5d4a2a;
+            border-radius: 5px;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card::before {
+        .chapter-card::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, #8b4513, #d2b48c, #8b4513);
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #b8941f, #e8c35d, #b8941f);
         }
         
-        .card-header {
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: #e8c35d;
+        }
+        
+        .chapter-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #b8941f;
+            color: #1a1510;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed #8b4513;
-            padding-bottom: 10px;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
         
-        .card-title {
+        .chapter-title {
             font-size: 1.4rem;
-            color: #8b2200;
-            font-weight: bold;
-        }
-        
-        .card-hours {
-            background: #8b4513;
-            color: #f9f3e5;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-        }
-        
-        .card-content {
-            margin-bottom: 15px;
-        }
-        
-        .card-mission {
-            font-weight: bold;
-            color: #5d4037;
+            color: #e8c35d;
             margin-bottom: 10px;
+            padding-right: 40px;
         }
         
-        .card-tech {
-            background: #e8d9b0;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-            font-size: 0.9rem;
+        .chapter-description {
+            font-size: 0.95rem;
+            color: #c0a86d;
+            line-height: 1.5;
         }
         
-        .card-output {
-            background: #d2b48c;
-            padding: 10px;
-            border-radius: 5px;
+        /* 底部信息 */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
             font-size: 0.9rem;
-            border-left: 3px solid #8b4513;
+            color: #8a7a5a;
+            border-top: 1px solid #3a2a1a;
+            padding-top: 20px;
         }
         
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .cards-container {
-                grid-template-columns: 1fr;
+            .scroll-container {
+                padding: 20px;
+                margin-top: 20px;
             }
             
-            .main-title {
+            h1 {
                 font-size: 2rem;
             }
             
-            .subtitle {
-                font-size: 1.2rem;
+            .chapters {
+                grid-template-columns: 1fr;
             }
         }
         
-        /* 卷章标题 */
-        .volume-title {
-            text-align: center;
-            margin: 40px 0 20px;
-            font-size: 2rem;
-            color: #8b2200;
-            border-bottom: 2px solid #8b4513;
-            padding-bottom: 10px;
-            position: relative;
-        }
-        
-        .volume-title::before, .volume-title::after {
-            content: "◆";
-            color: #8b4513;
-            margin: 0 15px;
-        }
-        
-        /* 页脚 */
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #8b4513;
-            color: #5d4037;
-            font-size: 0.9rem;
+        /* 印章效果 */
+        .seal {
+            position: absolute;
+            bottom: -30px;
+            right: 30px;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%23a52a2a" stroke-width="8"/><text x="50" y="55" text-anchor="middle" fill="%23a52a2a" font-family="SimSun" font-size="14" font-weight="bold">钦天监秘要</text></svg>') no-repeat center;
+            opacity: 0.7;
+            transform: rotate(15deg);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="scroll-container">
-            <!-- 页面标题 -->
-            <div class="header">
-                <h1 class="main-title">钦天监秘要</h1>
-                <h2 class="subtitle">QGIS盘古大陆灾害推演与应急策论</h2>
-                <p>基于QGIS的空间分析实战教程</p>
-                
-                <div class="core-mission">
-                    <p><strong>学员身份：</strong>轩辕国"钦天监"新任策士，或洛川府新任幕僚</p>
-                    <p><strong>核心使命：</strong>运用上古神器"山河社稷图"(QGIS)的推演之力，辅佐洛川府应对即将到来的天灾——"共工之怒"</p>
-                </div>
+    <div class="scroll-container">
+        <div class="header">
+            <h1>钦天监秘要</h1>
+            <div class="subtitle">QGIS盘古大陆灾害推演与应急策论</div>
+        </div>
+        
+        <div class="intro">
+            <p>平行宇宙中的地球，存在一个以中国古代神话命名的"盘古大陆"。本课程通过"盘古大陆"的奇幻叙事，将技术操作转化为一场充满使命感的冒险。</p>
+            <p><strong>您的身份：</strong> 轩辕国"钦天监"新任策士，或洛川府新任幕僚。</p>
+            <p><strong>核心使命：</strong> 运用上古神器"山河社稷图"（即QGIS）的推演之力，辅佐洛川府应对即将到来的天灾——"共工之怒"。</p>
+        </div>
+        
+        <div class="chapters">
+            <div class="chapter-card" onclick="location.href='chapter1.html'">
+                <div class="chapter-number">一</div>
+                <div class="chapter-title">星象示警：风险识别</div>
+                <div class="chapter-description">学习使用QGIS基础功能，识别盘古大陆的地形地貌与潜在灾害风险区域，解读天象预示的危机。</div>
             </div>
             
-            <!-- 卷章导航 -->
-            <div class="chapter-nav">
-                <button class="nav-btn active" data-volume="volume1">卷一：星象示警·风险洞察篇</button>
-                <button class="nav-btn" data-volume="volume2">卷二：未雨绸缪·应急准备篇</button>
-                <button class="nav-btn" data-volume="volume3">卷三：休养生息·复盘精进篇</button>
+            <div class="chapter-card" onclick="location.href='chapter2.html'">
+                <div class="chapter-number">二</div>
+                <div class="chapter-title">筑城修坝：防灾准备</div>
+                <div class="chapter-description">掌握QGIS空间分析工具，规划洛川府防御工事，为"共工之怒"做准备。</div>
             </div>
             
-            <!-- 卷一内容 -->
-            <div class="volume-title" id="volume1">卷一：星象示警·风险洞察篇（10学时）</div>
-            <div class="cards-container">
-                <!-- 第一回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第一回 授神器·观大势</h3>
-                        <span class="card-hours">4学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">熟悉QGIS基础操作，建立洛川府空间数据库</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>坐标系设置、矢量数据加载、DEM地形渲染
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《洛川府乾坤大势图》（含正确坐标系的山川地势图）
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第二回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第二回 集情报·辨吉凶</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">空间化人口数据，标记关键基础设施</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>属性表连接、数据数字化、OSM数据获取
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《洛川府承灾体情报图集》（人口分布+关键设施）
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第三回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第三回 推演水势·绘风险图</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">基于DEM模拟洪水淹没范围</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>水文分析工具链、栅格计算器重分类
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《"共工之怒"洪水危险性预言图》（分等级风险图）
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第四回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第四回 察民情·析脆弱</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">叠加分析风险与承灾体暴露度</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>缓冲区分析、叠加运算、脆弱性指数构建
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《灾民暴露度与脆弱性分析策论》（含统计报告）
-                        </div>
-                    </div>
-                </div>
+            <div class="chapter-card" onclick="location.href='chapter3.html'">
+                <div class="chapter-number">三</div>
+                <div class="chapter-title">灾中驰援：应急响应</div>
+                <div class="chapter-description">运用QGIS网络分析与路径规划，制定最优救援路线，在灾害中高效调度资源。</div>
             </div>
             
-            <!-- 卷二内容 -->
-            <div class="volume-title" id="volume2" style="display: none;">卷二：未雨绸缪·应急准备篇（12学时）</div>
-            <div class="cards-container" id="volume2-cards" style="display: none;">
-                <!-- 第五回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第五回 布阵眼·择避难所</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">评估并优化应急避难场所覆盖网络</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>服务区分析、空间查询、选址建模
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《应急避难体系评估与优化方案图》
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第六回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第六回 辟生路·划疏散径</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">规划高风险区至避难所的最优路径</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>网络分析、最短路径算法、成本距离计算
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《重点区域人员疏散路径规划图》
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第七回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第七回 观天镜·速评灾情</h3>
-                        <span class="card-hours">4学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">利用遥感影像实现灾情快速评估</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>NDWI水体提取、变化检测、损失估算
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《灾后即时评估图与简报》（含淹没分析）
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第八回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第八回 调粮草·优配物资</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">设计应急物资多对多调配优化方案</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>位置分配算法、运输成本建模
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《应急物资调度优化方案图》
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第九回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第九回 绘战图·呈报天听</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">整合多源数据生成决策用图</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>地图排版设计、Qgis2Web发布
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>PDF应急指挥图+交互式Web地图
-                        </div>
-                    </div>
-                </div>
+            <div class="chapter-card" onclick="location.href='chapter4.html'">
+                <div class="chapter-number">四</div>
+                <div class="chapter-title">灾后重建：恢复评估</div>
+                <div class="chapter-description">通过QGIS空间统计与变化检测，评估灾害损失，制定科学的重建计划。</div>
             </div>
             
-            <!-- 卷三内容 -->
-            <div class="volume-title" id="volume3" style="display: none;">卷三：休养生息·复盘精进篇（10学时）</div>
-            <div class="cards-container" id="volume3-cards" style="display: none;">
-                <!-- 第十回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第十回 察复苏·监重建</h3>
-                        <span class="card-hours">2学时</span>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-mission">监测灾后生态与经济恢复进程</p>
-                        <div class="card-tech">
-                            <strong>关键技术：</strong>时序影像分析、NDVI/夜间灯光指标
-                        </div>
-                        <div class="card-output">
-                            <strong>交付成果：</strong>《灾后恢复进程时序监测报告》
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第十一回 -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">第十一回 溯根源·析热域</h3>
-                        <span class="card-hours">2学时</span>
+            <div class="chapter-card" onclick="location.href='chapter5.html'">
+                <div class="chapter-number">五</div>
+                <div class="chapter-title">神器进阶：高级推演</div>
+                <div class="chapter-description">探索QGIS三维分析与模型构建，掌握更精准的灾害预测与推演技术。</div>
+            </div>
+            
+            <div class="chapter-card" onclick="location.href='chapter6.html'">
+                <div class="chapter-number">六</div>
+                <div class="chapter-title">天机秘术：数据可视化</div>
+                <div class="chapter-description">学习制作专业地图与交互式可视化，将分析结果转化为直观的决策支持工具。</div>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter6.html'">
+                <div class="chapter-number">六</div>
+                <div class="chapter-title">天机秘术：数据可视化</div>
+                <div class="chapter-description">学习制作专业地图与交互式可视化，将分析结果转化为直观的决策支持工具。</div>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter6.html'">
+                <div class="chapter-number">六</div>
+                <div class="chapter-title">天机秘术：数据可视化</div>
+                <div class="chapter-description">学习制作专业地图与交互式可视化，将分析结果转化为直观的决策支持工具。</div>
+            </div>
+            <div class="chapter-card" onclick="location.href='chapter6.html'">
+                <div class="chapter-number">六</div>
+                <div class="chapter-title">天机秘术：数据可视化</div>
+                <div class="chapter-description">学习制作专业地图与交互式可视化，将分析结果转化为直观的决策支持工具。</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>轩辕国钦天监 · 洛川府幕僚培训课程 · 山河社稷图推演系统</p>
+            <p>共工之怒预警等级：乙级 · 当前推演进度：初阶</p>
+        </div>
+        
+        <div class="seal"></div>
+    </div>
+
+    <script>
+        // 为章节卡片添加点击效果
+        document.querySelectorAll('.chapter-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+        
+        // 添加页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.scroll-container').style.opacity = '0';
+            document.querySelector('.scroll-container').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.querySelector('.scroll-container').style.transition = 'all 0.8s ease';
+                document.querySelector('.scroll-container').style.opacity = '1';
+                document.querySelector('.scroll-container').style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
+</body>
+</html>
