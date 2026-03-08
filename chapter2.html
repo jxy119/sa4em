@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="蒋新宇" />
+
+<meta name="date" content="2026-03-07" />
+
+<title>第二回 集情报 绘舆图</title>
+
+<script src="chapter2_files/header-attrs-2.30/header-attrs.js"></script>
+<script src="chapter2_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="chapter2_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="chapter2_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="chapter2_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="chapter2_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="chapter2_files/navigation-1.1/tabsets.js"></script>
+<link href="chapter2_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="chapter2_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">第二回 集情报 绘舆图</h1>
+<h4 class="author">蒋新宇</h4>
+<h4 class="date">2026-03-07</h4>
+
+</div>
+
+
+<hr />
+<div id="剧情导入" class="section level3">
+<h3><strong>【剧情导入】</strong></h3>
+<p>监正将你唤至观星台，指着脚下金陵府的疆域图，沉声道：“’共工之怒’非同小可，知己知彼，方能百战不殆。你即刻起，需将金陵府的人口分布、物产资源、山川地势及关键设施（如医馆、粮仓、官署）之情报，悉数汇集于此图之上。此图乃一切推演谋划之基石，务求详尽精准，不得有误！”</p>
+<hr />
+</div>
+<div id="理论思考" class="section level3">
+<h3><strong>【理论思考】</strong></h3>
+<div id="坐标与投影定位天地万物的尺规" class="section level4">
+<h4><strong>1. 坐标与投影：定位天地万物的尺规</strong></h4>
+<ul>
+<li><strong>地理坐标系（球面坐标）：</strong></li>
+</ul>
+<p>此乃天地本源之坐标。它将地球视为一个椭球体，以<strong>经纬度</strong>为刻度，构建了一个覆盖全球的网格。例如，WGS84坐标系便是当今全球定位系统（GPS）的基石。由于大地椭球体的定义不一样，会有多个地理坐标系。</p>
+<p><img
+src="figures/%E5%9C%B0%E7%90%86%E5%9D%90%E6%A0%87%E7%B3%BB.png"
+style="width:70.0%" alt="地理坐标系" /> <br></p>
+<p>然其单位为度，直接用于测量距离、面积会因球面弯曲而产生巨大误差。此特性决定了地理坐标不宜直接进行精确的量算。（地球是球面，同一经度线上，纬度1度所对应的实际距离大致恒定，约为111公里；但同一纬度线上，经度1度所对应的距离则从赤道上的约111公里向两极递减至0公里。例如，在金陵（南京，北纬32°）附近，经度1度约合94公里。
+）</p>
+<ul>
+<li><strong>投影坐标系（平面坐标）：</strong></li>
+</ul>
+<p>为将球面地图精准绘制于平面（图纸或屏幕）之上，必须通过数学法则进行“投影”，即将其“展平”。此过程如同将橘子皮剥下并压平，不可避免会产生<strong>变形</strong>——或扭曲形状，或改变面积，或影响距离与方向。故需根据应用之地域与目的“权衡利弊”，选择合适的投影：</p>
+<p><img
+src="figures/%E6%8A%95%E5%BD%B1%E5%9D%90%E6%A0%87%E7%B3%BB.png"
+alt="投影坐标系" /> <br></p>
+<div class="float">
+<img
+src="figures/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%8A%95%E5%BD%B1%E6%96%B9%E5%BC%8F.jpg"
+alt="不同的投影方式" />
+<div class="figcaption">不同的投影方式</div>
+</div>
+<p><br></p>
+<p>在坐标过程中，我们需要保证一些核心的不变原则，这导致了三种投影方式类型。</p>
+<p><strong>等角投影（正形投影）：</strong></p>
+<p>核心是保持局部范围内的“形状”不变<strong>。想象一下，在地图上量测两个方向线之间的夹角，能与实地保持一致。这对于航海、航空等需要精确方向的领域至关重要，因为航线方向不能错。</strong>最常见的墨卡托投影就是等角投影**，它的经纬线是垂直的直线网格，但缺点是高纬度地区的面积会被极度夸大（例如格陵兰岛看起来和非洲差不多大）。</p>
+<p><img
+src="figures/%E5%A2%A8%E5%8D%A1%E6%89%98%E6%8A%95%E5%BD%B1%E7%9A%84%E4%B8%96%E7%95%8C%E5%9C%B0%E5%9B%BE.jpg"
+alt="投影坐标系" /> <br></p>
+<p>从上面地图，我们能看出来：格陵兰比印度大？挪威和越南比呢？中国比俄罗斯小多少？我们再来看看实际的国土面积比较。</p>
+<p><img
+src="figures/%E5%8D%B0%E5%BA%A6%E6%A0%BC%E9%99%B5%E5%85%B0%E6%AF%94%E8%BE%83.png"
+width="300" alt="India=1.52 Greenland" /> <br></p>
+<p><img
+src="figures/%E6%8C%AA%E5%A8%81%E5%92%8C%E8%B6%8A%E5%8D%97%E7%9A%84%E6%AF%94%E8%BE%83.png"
+width="300" alt="Norway=0.98 vitnam" /> <br></p>
+<p><img
+src="figures/%E4%B8%AD%E5%9B%BD%E5%92%8C%E4%BF%84%E7%BD%97%E6%96%AF%E7%9A%84%E6%AF%94%E8%BE%83.png"
+width="300" alt="China=0.56 Russia" /> <br></p>
+<p><strong>等积投影：</strong></p>
+<p><strong>核心是保持地物的“相对面积大小”不变</strong>。无论在地球的哪个区域，地图上1平方厘米所代表的实地面积是相同的。这在进行资源统计、人口密度分析（如本回任务）时不可或缺，因为面积的准确性直接影响判断。</p>
+<div class="float">
+<img
+src="figures/%E5%8F%A4%E8%92%82%E7%AD%89%E9%9D%A2%E7%A7%AF%E6%8A%95%E5%BD%B1%E4%B8%96%E7%95%8C%E5%9C%B0%E5%9B%BE.png"
+alt="古蒂等面积投影世界地图" />
+<div class="figcaption">古蒂等面积投影世界地图</div>
+</div>
+<p><br></p>
+<p><strong>等距投影：</strong></p>
+<p><strong>核心是保持从地图中心点到其他任意点的“距离”不变</strong>。这适合于需要以某地为中心进行距离测算的地图，如雷达监测范围图、机场航线图。但需要注意的是，它通常只能保证从一个或几个中心点的距离准确，并非任意两点间的距离都准确。</p>
+<p><strong>我们通常看到的地图常常是折衷投影，在形状、面积、距离上寻求平衡，变形相对均匀的。</strong></p>
+<blockquote>
+<p><strong>中国地图/省级地图：</strong>
+通常采用<strong>阿尔伯斯等积圆锥投影</strong>或<strong>兰勃特等角圆锥投影</strong>。<br>
+<strong>大比例尺城市地图/工程用图：</strong>
+则普遍采用<strong>高斯-克吕格投影</strong>（一种横轴墨卡托投影的变种，按经差分带投影，每个带内变形极小，精度高）。</p>
+</blockquote>
+<p><strong>核心要义：</strong>
+在GIS中，所有图层必须置于<strong>同一投影坐标系</strong>下，方能进行精确的空间量算与分析。于金陵府而言，常采用为国家层面统一规划的<strong>高斯-克吕格投影</strong>（如基于CGCS2000大地基准的投影），以确保府内量算之精准。</p>
+<hr />
+</div>
+<div id="地理数据类型构筑数字舆图的两种基石" class="section level4">
+<h4><strong>2. 地理数据类型：构筑数字舆图的两种基石</strong></h4>
+<p>如何把我们这个世界放入计算机中呢？有两种方式：</p>
+<div class="float">
+<img
+src="figures/%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE%E5%92%8C%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE.png"
+style="width:70.0%" alt="矢量数据和栅格数据" />
+<div class="figcaption">矢量数据和栅格数据</div>
+</div>
+<p><strong>矢量数据：以几何要素描绘世界</strong></p>
+<p><strong>本质：</strong>
+用点、线、面（多边形）等离散的几何对象来抽象表示地理实体。每个对象不仅有其空间位置（几何图形），还附有详细的属性信息（如名称、类型、数值），好似给每个地物建立了详细的档案。</p>
+<ul>
+<li><strong>三大要素：</strong>
+<ul>
+<li><strong>点：</strong>
+代表零维位置，如<code>医馆</code>、<code>粮仓</code>、<code>山峰</code>。</li>
+<li><strong>线：</strong>
+代表一维线性特征，如<code>道路</code>、<code>河流</code>、<code>行政边界</code>。</li>
+<li><strong>面：</strong>
+代表二维平面区域，如<code>行政区划</code>、<code>湖泊</code>、<code>建筑基底</code>。</li>
+</ul></li>
+</ul>
+<p><strong>优势：</strong>
+位置精确、属性丰富、图形清晰美观，非常适合用于<strong>边界明确的地理实体</strong>，支持复杂的查询、分析和专题制图。例如，可以轻松查询“金陵府人口超过10万的区县有哪些？”。</p>
+<div class="float">
+<img
+src="figures/%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.png"
+alt="矢量数据模型" />
+<div class="figcaption">矢量数据模型</div>
+</div>
+<p><strong>栅格数据：以连续像元记录现象</strong></p>
+<p><strong>本质：</strong>
+将空间划分为规则且密集的网格（像元阵列），每个像元（像素）记录一个值，以此表现地理现象在空间上的连续变化。它更像是一张由无数小色块组成的照片或采样图。</p>
+<ul>
+<li><strong>常见类型：</strong>
+<ul>
+<li><strong>影像数据：</strong>
+卫星影像、航空照片，每个像元值为颜色信息（如RGB值）。</li>
+<li><strong>专题栅格：</strong>
+数字高程模型，每个像元值为高程；温度分布图，每个像元值为温度；降雨量分布图等。</li>
+</ul></li>
+</ul>
+<p><strong>优势：</strong>
+能有效表现<strong>连续变化</strong>的地理现象，适用于表面分析（如计算坡度、坡向）、遥感解译等。其精度取决于<strong>像元大小（分辨率）</strong>，像元越小，细节越丰富（如0.5米分辨率影像比10米分辨率能看清更多细节）。</p>
+<p><img
+src="figures/%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.png"
+alt="栅格数据模型" /> <br></p>
+<p><strong>相辅相成：</strong>
+在实际应用中，常将矢量数据（如行政边界、道路）叠加在栅格数据（如卫星影像）之上，互为补充，共同构建对现实世界的完整数字表达。例如，将行政区划矢量边界叠加在卫星影像上，可以直观地看到每个区域的实地景观。</p>
+<p><strong>矢量数据与栅格数据对比</strong></p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">特征</th>
+<th align="left">矢量数据</th>
+<th align="left">栅格数据</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>数据结构</strong></td>
+<td align="left">点、线、面</td>
+<td align="left">像元（像素）矩阵</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>最佳表示</strong></td>
+<td align="left"><strong>离散对象</strong>（如街道、建筑、行政点）</td>
+<td
+align="left"><strong>连续现象</strong>（如高程、温度、植被覆盖）</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>数据精度</strong></td>
+<td align="left">位置精度高，边界清晰</td>
+<td align="left">精度取决于分辨率，边界呈锯齿状</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>存储效率</strong></td>
+<td align="left">对于简单对象效率高</td>
+<td align="left">对于覆盖大面积、高分辨率的数据，文件体积庞大</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>典型应用</strong></td>
+<td align="left">精确测量、网络分析、专题制图</td>
+<td align="left">表面分析、图像分类、背景底图</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>放大效果</strong></td>
+<td align="left">图形质量不变，始终清晰</td>
+<td align="left">过度放大会出现像素块，变得模糊</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>【QGIS实战】</strong></p>
+<p><strong>一：已有矢量数据查看</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>加载数据：</strong>
+将监正提供的金陵府<code>jinling_area.shp</code>（面）（需包含坐标）数据导入QGIS窗口。</li>
+<li><strong>查询情报：</strong>
+<ul>
+<li>查看与设置图层坐标系。<strong>“右键” &gt; “图层CRS”</strong> 。</li>
+<li>使用 <strong>“识别要素”</strong>
+工具，点击地图上的任意区域，在弹出的窗口中查看其属性。</li>
+</ul></li>
+<li><strong>进行标注：</strong>
+<ul>
+<li>在 <strong>“属性” &gt; “标注”</strong>
+中，选择“单一标注”，字段选择“名称_name”，为每个区域加上名称标注。</li>
+</ul></li>
+</ol>
+<p><img src="figures/%E6%A0%87%E6%B3%A8.png" alt="标注" /><br />
+<br></p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>渲染图层：</strong>
+<ul>
+<li>右键点击<code>人口数据</code>图层，选择 <strong>“属性” &gt;
+“符号化”</strong>。</li>
+<li>选择 <strong>“渐变符号”</strong>，根据区域名称字段设置颜色。</li>
+</ul></li>
+</ol>
+<p><img src="figures/%E7%AC%A6%E5%8F%B7%E5%8C%96.png"
+alt="符号化" /><br />
+<br></p>
+<p><strong>二：QGIS 已有矢量数据编辑</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>编辑属性（补充情报）：</strong></p>
+<ul>
+<li><p>点击工具栏 <strong>“切换编辑模式”</strong>
+按钮，启动编辑。</p></li>
+<li><p>打开 <strong>“属性表”</strong>，点击
+<strong>“新建字段”</strong>，增加一个“人口”整型字段。</p></li>
+</ul>
+<p><img src="figures/%E5%A2%9E%E5%8A%A0%E5%AD%97%E6%AE%B5.png"
+alt="添加字段" /><br />
+<br></p>
+<ul>
+<li>根据以下表格，为每个区域手动录入人口数据。</li>
+</ul></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">区划名称</th>
+<th align="left">常住人口（2020年普查）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">玄武区</td>
+<td align="left">537825</td>
+</tr>
+<tr class="even">
+<td align="left">秦淮区</td>
+<td align="left">740809</td>
+</tr>
+<tr class="odd">
+<td align="left">建邺区</td>
+<td align="left">534257</td>
+</tr>
+<tr class="even">
+<td align="left">鼓楼区</td>
+<td align="left">940387</td>
+</tr>
+<tr class="odd">
+<td align="left">浦口区</td>
+<td align="left">1171603</td>
+</tr>
+<tr class="even">
+<td align="left">栖霞区</td>
+<td align="left">987835</td>
+</tr>
+<tr class="odd">
+<td align="left">雨花台区</td>
+<td align="left">608780</td>
+</tr>
+<tr class="even">
+<td align="left">江宁区</td>
+<td align="left">1926117</td>
+</tr>
+<tr class="odd">
+<td align="left">六合区</td>
+<td align="left">946563</td>
+</tr>
+<tr class="even">
+<td align="left">溧水区</td>
+<td align="left">491336</td>
+</tr>
+<tr class="odd">
+<td align="left">高淳区</td>
+<td align="left">429173</td>
+</tr>
+</tbody>
+</table>
+<p><img
+src="figures/%E6%89%8B%E5%8A%A8%E8%BE%93%E5%85%A5%E5%B1%9E%E6%80%A7.png"
+alt="手动输入属性" /><br />
+<br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><strong>编辑空间数据（修正疆界）：</strong></p>
+<ul>
+<li>保持编辑模式，使用
+<strong>“添加多边形要素”</strong>。以卫星图或者地图作为地图，将宝华镇添加进入南京。</li>
+</ul>
+<div class="float">
+<img src="figures/%E5%8A%A0%E5%85%A5%E5%AE%9D%E5%8D%8E%E9%95%87.png"
+alt="加入宝华镇" />
+<div class="figcaption">加入宝华镇</div>
+</div>
+<ul>
+<li><p>若发现边界需调整，可拖动边界上的节点进行修正。</p></li>
+<li><p><strong>合并区域：</strong>
+不想让宝华作为一个新的行政区，让它归属栖霞区管，选中两个区域区域，使用
+<strong>“合并所选要素”</strong>
+工具（高级数据化工具栏），将其合并为一个更大的行政单位。</p></li>
+</ul>
+<div class="float">
+<img src="figures/%E5%90%88%E5%B9%B6%E8%A6%81%E7%B4%A0.png"
+alt="合并要素" />
+<div class="figcaption">合并要素</div>
+</div>
+<ul>
+<li><p><strong>分割区域：</strong> 使用 <strong>“分割要素”</strong>
+工具，画一条线将一个区域按规划一分为二。</p></li>
+<li><p>编辑完成后，务必 <strong>“保存编辑”</strong> 并
+<strong>“停止编辑”</strong>。</p></li>
+</ul></li>
+</ol>
+<p><strong>三、矢量数据创造 - 标定关键设施</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>创建新图层：</strong></p>
+<ul>
+<li><strong>图层 &gt; 创建图层 &gt; 新建Shapefile图层</strong>。</li>
+<li>选择 <strong>“点”</strong>
+几何类型，并添加字段，如“名称”（文本）、“类型”（文本）、“容量”（整数）。</li>
+<li>命名如<code>infrastructure.shp</code>并保存。</li>
+</ul>
+<p><img
+src="figures/%E5%88%9B%E5%BB%BA%E6%96%B0%E5%9B%BE%E5%B1%82.png"
+alt="创建新图层" /><br />
+<br></p></li>
+<li><p><strong>数字化标绘：</strong></p>
+<ul>
+<li>启动该图层的编辑模式，使用 <strong>“添加点要素”</strong> 工具。</li>
+<li>参照底图（如扫描的府志图或卫星图），在相应位置点击，精确标绘出<code>南京大学</code>、<code>万达茂</code>等居住、粮仓等关键设施。每次点击后，在弹出的属性窗口中录入该设施的详细信息。</li>
+</ul>
+<p><img
+src="figures/%E6%B7%BB%E5%8A%A0%E7%82%B9%E5%9B%BE%E5%B1%82.png"
+alt="添加点图层" /><br />
+<br></p></li>
+</ol>
+<p><strong>四、汲取天地灵气（数据获取）-
+访天机阁（在线数据）</strong></p>
+<p>是不是感觉刚刚使用老师给的数据和卫星遥感数据，有些不方便啊？（分辨率、范围、信息都不够）。我们来试试GIS的天机阁，在线信息。</p>
+<ol style="list-style-type: decimal">
+<li><strong>安装插件：</strong> <strong>“插件” &gt;
+“管理和安装插件”</strong>，搜索并安装 <strong>Chinese basemap</strong>
+插件。</li>
+</ol>
+<p><img src="figures/%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6.png"
+alt="安装插件" /><br />
+<br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>获取数据：</strong>
+<ul>
+<li>打开Chinese basemap面板，选择
+<code>高德影像底图</code>。你就可以通过对底图的观察，更好地获取信息啦。</li>
+</ul></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%BD%BF%E7%94%A8%E5%9C%A8%E7%BA%BF%E5%8D%AB%E6%98%9F%E5%9C%B0%E5%9B%BE.png"
+alt="使用在线卫星地图" />
+<div class="figcaption">使用在线卫星地图</div>
+</div>
+<p><br></p>
+<hr />
+</div>
+</div>
+<div id="回家练习" class="section level3">
+<h3><strong>【回家练习】</strong></h3>
+<p>通过本回演练，你已掌握“山河社稷图”（QGIS）的基本操用之法，<strong>奠定了防灾谋划的数据基石</strong>。你学会了如何加载、查询、渲染现有情报（矢量数据），并能修正、补充甚至创造新的地理要素。更重要的是，你已能连通“天机阁”（OSM），汲取天地间的开源灵气。至此，一幅标注了人口分布、关键设施与详尽基础地理信息的金陵府全图已可以在你手中做出，为下一步分析灾情、调配资源等奠定了坚实的数据基础。</p>
+<p>那么？我们先不弄那么复杂，你能不能试着做一下金陵府最重要的区域“金陵国子监”（南京大学）的地图呢？</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
