@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="蒋新宇" />
+
+<meta name="date" content="2026-03-12" />
+
+<title>第三回 矢量计 绘山河</title>
+
+<script src="chapter3_files/header-attrs-2.30/header-attrs.js"></script>
+<script src="chapter3_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="chapter3_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="chapter3_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="chapter3_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="chapter3_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="chapter3_files/navigation-1.1/tabsets.js"></script>
+<link href="chapter3_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="chapter3_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">第三回 矢量计 绘山河</h1>
+<h4 class="author">蒋新宇</h4>
+<h4 class="date">2026-03-12</h4>
+
+</div>
+
+
+<hr />
+<div id="剧情导入" class="section level3">
+<h3><strong>【剧情导入】</strong></h3>
+<p>监正掐指一算，沉思片刻道：“时间紧迫，‘金陵国子监’（南京大学）乃金陵文脉所系，亦是防灾要地。其内楼阁林立，精英数千，且有重要典籍馆藏。若大江决堤，此处安危非同小可。”</p>
+<p>“今命你以’金陵国子监’为范，绘制一幅<strong>金陵国子监防灾底图</strong>。虽范围缩小，但五脏俱全，须体现矢量编辑之精髓。此图需含四层乾坤：</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>学府疆界</strong>：校区边界、各院系区域</p></li>
+<li><p><strong>楼宇分布</strong>：教学楼、宿舍、图书馆、实验室等</p></li>
+<li><p><strong>地形水系</strong>：校园内水系、沟渠、地势高低</p></li>
+<li><p><strong>防汛要害</strong>：配电房、档案馆、物资仓库、高地避难处”</p></li>
+</ol>
+<p>“记住，”监正目光如炬，“此图虽微，可窥全豹。务必严谨细致，他日若需绘制全金陵之图，此乃练兵之机。”</p>
+<hr />
+</div>
+<div id="理论思考" class="section level3">
+<h3><strong>【理论思考】</strong></h3>
+<p><strong>核心理念：矢量数据的层次化组织</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>空间参考统一性</strong>：所有图层必须基于同一坐标系，确保空间位置准确叠加</p></li>
+<li><p><strong>图层逻辑结构</strong>：按”基础-专题”层次组织，基础图层（边界、道路）在下，专题图层（建筑、设施）在上</p></li>
+<li><p><strong>属性表设计原则</strong>：</p>
+<ul>
+<li><p>字段类型匹配数据性质（文本、整数、小数）</p></li>
+<li><p>预留扩展字段（如<code>importance</code>防汛重要性）</p></li>
+<li><p>设置字段约束保证数据质量</p></li>
+</ul></li>
+<li><p><strong>拓扑关系维护</strong>：建筑应在校区边界内，道路应连接畅通，避免几何错误</p></li>
+</ol>
+<p><strong>制图表达的艺术与科学</strong></p>
+<ul>
+<li><p><strong>色彩语义</strong>：暖色系（教学楼）表人文，冷色系（水系）表自然，红色表危险/重要</p></li>
+<li><p><strong>符号等级</strong>：通过大小、形状区分要素重要性</p></li>
+<li><p><strong>标注策略</strong>：避免压盖，按视图缩放动态显示</p></li>
+<li><p><strong>地图要素</strong>：指南针、比例尺、相关信息、地图布局……</p></li>
+</ul>
+<hr />
+</div>
+<div id="qgis实战" class="section level3">
+<h3><strong>【QGIS实战】</strong></h3>
+<div id="基础数据说明" class="section level4">
+<h4><strong>基础数据说明</strong></h4>
+<ol style="list-style-type: decimal">
+<li><p><strong>底图参考</strong>：优先采用高德卫星影像作为底图参考。</p>
+<ul>
+<li><p><strong>理想标准</strong>：国家官方”天地图”为最权威底图，但因需申请API令牌，流程较为复杂。</p></li>
+<li><p><strong>实用方案</strong>：高德卫星影像数据开放易用，可作为本次练习的替代方案。</p></li>
+<li><p><strong>坐标说明</strong>：高德影像使用GCJ-02坐标系（俗称火星坐标系），此为基于WGS-84的加密坐标系。虽与国家标准CGCS2000存在细微差异，但在精度要求下不高情况下，两者可近似互换使用。</p></li>
+</ul></li>
+<li><p><strong>坐标设置</strong>：项目坐标系统一设置为
+<strong>EPSG:4527（CGCS2000 / 3-degree Gauss-Kruger zone
+39）</strong>。</p>
+<ul>
+<li><p>国家规范与金陵地区最适用的坐标系</p></li>
+<li><p>确保所有矢量图层在统一空间基准下精准叠加</p></li>
+</ul></li>
+</ol>
+<hr />
+</div>
+<div id="一新建工程与基础设置" class="section level4">
+<h4><strong>一、新建工程与基础设置</strong></h4>
+<p><strong>启动QGIS并创建新项目</strong></p>
+<p>关键步骤：</p>
+<ol style="list-style-type: decimal">
+<li><p>打开QGIS软件</p></li>
+<li><p>文件 → 新建项目（Ctrl+N）</p></li>
+<li><p>立即保存：文件 → 保存项目（Ctrl+S）</p></li>
+<li><p>命名：“金陵国子监防灾底图.qgz”</p></li>
+<li><p>选择合适存储位置</p></li>
+</ol>
+<div class="float">
+<img src="figures/%E4%B8%89%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B.png"
+alt="新建工程" />
+<div class="figcaption">新建工程</div>
+</div>
+<p><strong>设置项目坐标系</strong></p>
+<p>关键步骤：</p>
+<ol style="list-style-type: decimal">
+<li><p>项目 → 属性 → CRS（坐标系）</p></li>
+<li><p>在筛选器中输入”4527”</p></li>
+<li><p>选择”EPSG:4527 - CGCS2000 / 3-degree Gauss-Kruger zone
+39”</p></li>
+<li><p>点击”应用”</p></li>
+<li><p>点击”确定”保存设置</p></li>
+</ol>
+<p>验证：查看QGIS右下角状态栏，确认显示”EPSG:4527”</p>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E8%AE%BE%E5%AE%9A%E5%B7%A5%E7%A8%8B%E5%9D%90%E6%A0%87%E7%B3%BB.png"
+alt="设定工程坐标系" />
+<div class="figcaption">设定工程坐标系</div>
+</div>
+<p><strong>添加参考底图</strong></p>
+<p>利用Chinese basemap这个插件</p>
+<div class="float">
+<img src="figures/%E4%B8%89%E6%B7%BB%E5%8A%A0%E5%BA%95%E5%9B%BE.png"
+alt="添加底图" />
+<div class="figcaption">添加底图</div>
+</div>
+<hr />
+</div>
+<div id="二配置捕捉设置绘图前需要做" class="section level4">
+<h4><strong>二、配置捕捉设置（绘图前需要做）</strong></h4>
+<p><strong>开启捕捉工具栏</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>视图 → 工具栏 → 确保”捕捉工具栏”已勾选</p></li>
+<li><p>界面会出现捕捉工具栏（磁铁图标相关工具）</p></li>
+</ol>
+<p><strong>详细捕捉配置（这里需要大家一边画图，一边探索一下）</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>点击磁铁图标”启用捕捉”</p></li>
+<li><p>点击右侧下拉箭头 → 捕捉选项</p></li>
+<li><p>设置参数：</p>
+<ul>
+<li>容差：12像素</li>
+<li>单位：像素</li>
+<li>拓扑编辑：启用</li>
+</ul></li>
+<li><p>捕捉类型：</p></li>
+</ol>
+<pre><code>根据需要选择捕捉类型，可以先把顶点捕捉和交叉点捕捉打开。</code></pre>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E8%AE%BE%E5%AE%9A%E6%8D%95%E6%8D%89%E7%8A%B6%E6%80%81.png"
+alt="设定捕捉" />
+<div class="figcaption">设定捕捉</div>
+</div>
+<hr />
+</div>
+<div id="三按顺序创建各图层" class="section level4">
+<h4><strong>三、按顺序创建各图层</strong></h4>
+<p><strong>创建学府疆界（面图层）</strong></p>
+<p><strong>创建步骤：</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>图层 → 创建图层 → 新建Shapefile图层</p></li>
+<li><p>文件名：浏览选择存储位置，命名”boundary.shp”</p></li>
+<li><p>几何类型：选择”多边形”</p></li>
+<li><p>坐标系：确保选择”EPSG:4527”</p></li>
+<li><p>添加字段：</p>
+<ul>
+<li><p>点击”添加字段”按钮</p></li>
+<li><p>名称：name，类型：文本数据，长度：50</p></li>
+<li><p>名称：type，类型：文本数据，长度：20</p></li>
+<li><p>名称：area_m2，类型：十进制数，长度：10，精度：3</p></li>
+</ul></li>
+<li><p>点击”确定”创建图层</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E6%96%B0%E5%BB%BA%E8%BE%B9%E7%95%8C%E5%9B%BE%E5%B1%82.png"
+alt="新建边界图层" />
+<div class="figcaption">新建边界图层</div>
+</div>
+<p><strong>绘制步骤：</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>在图层面板选中”boundary”图层</p></li>
+<li><p>点击工具栏”切换编辑”（黄色铅笔图标）</p></li>
+<li><p>点击”添加面要素”工具（绿色多边形图标）</p></li>
+<li><p>在画布上开始绘制：</p>
+<ul>
+<li><p>沿校区边界逐点单击</p></li>
+<li><p>注意观察状态栏坐标变化</p></li>
+<li><p>使用捕捉功能确保图形闭合</p></li>
+</ul></li>
+<li><p>绘制完成后右键结束</p></li>
+<li><p>弹出属性对话框：</p>
+<ul>
+<li><p>name：金陵国子监</p></li>
+<li><p>type：主校区</p></li>
+<li><p>area_m2：暂时留空（后续计算）</p></li>
+</ul></li>
+<li><p>点击”确定”</p></li>
+<li><p>点击”保存编辑”（磁盘图标）</p></li>
+<li><p>点击”切换编辑”退出编辑模式</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E8%BE%B9%E7%95%8C%E5%BC%80%E5%A7%8B%E7%BB%98%E5%9B%BE.png"
+alt="边界绘图" />
+<div class="figcaption">边界绘图</div>
+</div>
+<p><strong>计算属性（面积）（其他计算长度等类似，大家自己探索）：</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>右键boundary图层 → 打开属性表</p></li>
+<li><p>点击”切换编辑模式”（黄色铅笔）</p></li>
+<li><p>右键area_m2字段 → 字段计算器</p></li>
+<li><p>勾选”仅更新选中的要素”</p></li>
+<li><p>表达式区域输入：$area</p></li>
+<li><p>点击”确定”计算面积</p></li>
+<li><p>保存编辑并退出编辑模式</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97%E9%9D%A2%E7%A7%AF.png"
+alt="计算面积" />
+<div class="figcaption">计算面积</div>
+</div>
+<p><strong>创建绿地系统（面图层）</strong></p>
+<p>操作步骤：</p>
+<ol style="list-style-type: decimal">
+<li><p>图层 → 创建图层 → 新建Shapefile图层</p></li>
+<li><p>文件名：“green_spaces.shp”</p></li>
+<li><p>几何类型：多边形</p></li>
+<li><p>坐标系：EPSG:4527</p></li>
+<li><p>字段设置：</p>
+<ul>
+<li><p>name（文本，50）：绿地名称</p></li>
+<li><p>type（文本，20）：草坪/林地/运动场/广场</p></li>
+<li><p>area_m2（小数，10,3）：面积</p></li>
+</ul></li>
+<li><p>确定创建</p></li>
+<li><p>绘制</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E5%88%9B%E5%BB%BA%E7%BB%BF%E5%9C%B0%E5%9B%BE%E5%B1%82.png"
+alt="创建绿地" />
+<div class="figcaption">创建绿地</div>
+</div>
+<p><strong>创建楼宇分布（面图层）</strong></p>
+<p>操作步骤：</p>
+<ol style="list-style-type: decimal">
+<li><p>新建Shapefile图层：“buildings.shp”</p></li>
+<li><p>几何类型：多边形</p></li>
+<li><p>坐标系：EPSG:4527</p></li>
+<li><p>字段设置：</p>
+<ul>
+<li><p>name（文本，50）：建筑名称</p></li>
+<li><p>type（文本，20）：教学/宿舍/实验/办公/图书馆</p></li>
+<li><p>floors（整数）：层数</p></li>
+<li><p>importance（文本，10）：高/中/低（防汛重要性）</p></li>
+</ul></li>
+<li><p>确定创建</p></li>
+<li><p>绘制</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E5%88%9B%E5%BB%BA%E5%BB%BA%E7%AD%91%E5%9B%BE%E5%B1%82.png"
+alt="创建建筑" />
+<div class="figcaption">创建建筑</div>
+</div>
+<p><strong>创建道路网络（线图层）</strong></p>
+<p>操作步骤：</p>
+<ol style="list-style-type: decimal">
+<li><p>新建Shapefile图层：“roads.shp”</p></li>
+<li><p>几何类型：线</p></li>
+<li><p>坐标系：EPSG:4527</p></li>
+<li><p>字段设置：</p>
+<ul>
+<li><p>name（文本，50）：道路名称</p></li>
+<li><p>type（文本，20）：主干道/次干道/步行道/消防通道</p></li>
+<li><p>length_m（小数，10,3）：道路长度</p></li>
+<li><p>width_m（小数，10,3）：道路宽度</p></li>
+</ul></li>
+<li><p>确定创建</p></li>
+<li><p>绘制</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E5%88%9B%E5%BB%BA%E9%81%93%E8%B7%AF%E5%9B%BE%E5%B1%82.png"
+alt="创建道路" />
+<div class="figcaption">创建道路</div>
+</div>
+<p><strong>创建水系排水（线图层）</strong></p>
+<p>操作步骤：</p>
+<ol style="list-style-type: decimal">
+<li><p>新建Shapefile图层：“water_system.shp”</p></li>
+<li><p>几何类型：线</p></li>
+<li><p>坐标系：EPSG:4527</p></li>
+<li><p>字段设置：</p>
+<ul>
+<li><p>name（文本，50）：水系名称</p></li>
+<li><p>type（文本，20）：河流/沟渠/排水管/蓄水池</p></li>
+<li><p>length_m（小数，10,3）：河流长度</p></li>
+</ul></li>
+<li><p>确定创建</p></li>
+<li><p>绘制</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E5%88%9B%E5%BB%BA%E6%B0%B4%E7%B3%BB%E5%9B%BE%E5%B1%82.png"
+alt="创建水系" />
+<div class="figcaption">创建水系</div>
+</div>
+<p><strong>创建校园出口（点图层）</strong></p>
+<p>操作步骤：</p>
+<ol style="list-style-type: decimal">
+<li><p>新建Shapefile图层：“gate.shp”</p></li>
+<li><p>几何类型：点</p></li>
+<li><p>坐标系：EPSG:4527</p></li>
+<li><p>字段设置：</p>
+<ul>
+<li>name（文本，50）：出口名称</li>
+</ul></li>
+<li><p>确定创建</p></li>
+<li><p>绘制</p></li>
+</ol>
+<div class="float">
+<img
+src="figures/%E4%B8%89%E5%88%9B%E5%BB%BA%E5%87%BA%E5%8F%A3%E5%9B%BE%E5%B1%82.png"
+alt="创建出口" />
+<div class="figcaption">创建出口</div>
+</div>
+<hr />
+</div>
+<div id="四设置图层样式上节课讲过的" class="section level4">
+<h4><strong>四、设置图层样式（上节课讲过的）</strong></h4>
+<p><strong>在图层面板中拖动图层排序</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>boundary（最底层）</p></li>
+<li><p>green_spaces</p></li>
+<li><p>buildings</p></li>
+<li><p>roads</p></li>
+<li><p>water_system</p></li>
+<li><p>gate（最顶层）</p></li>
+<li><p>高德卫星图（如有，可放最底层或关闭）</p></li>
+</ol>
+<p><strong>设置边界图层样式</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>右键boundary图层 → 属性 → 符号化</p></li>
+<li><p>选择”单一符号”</p></li>
+<li><p>点击符号预览进入符号编辑器：</p>
+<ul>
+<li><p>填充色：完全透明（Alpha=0）</p></li>
+<li><p>边框色：深红色 (#8B0000)</p></li>
+<li><p>边框宽度：1.2毫米</p></li>
+</ul></li>
+<li><p>确定应用</p></li>
+</ol>
+<p><strong>添加标注</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>属性 → 标注 → 单个标注</p></li>
+<li><p>值选择：name字段</p></li>
+<li><p>设置字体：黑体，12pt，深红色</p></li>
+<li><p>确定应用</p></li>
+</ol>
+<p>其它图层也类似</p>
+<hr />
+</div>
+<div id="五地图布局与输出" class="section level4">
+<h4><strong>五、地图布局与输出</strong></h4>
+<p><strong>创建打印布局</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>项目 → 新建打印布局</p></li>
+<li><p>命名：“金陵国子监防灾底图”</p></li>
+<li><p>在布局中添加：</p>
+<ul>
+<li><p>地图框（主要地图区域）</p></li>
+<li><p>图例（各图层符号说明）</p></li>
+<li><p>比例尺（地图尺度）</p></li>
+<li><p>指北针（方向指示）</p></li>
+<li><p>标题文本：“南京大学仙林校区防灾专题图”</p></li>
+</ul></li>
+<li><p>调整各元素位置和样式</p></li>
+</ol>
+<div class="float">
+<img src="figures/%E4%B8%89%E5%9C%B0%E5%9B%BE%E5%B8%83%E5%B1%80.png"
+alt="地图布局" />
+<div class="figcaption">地图布局</div>
+</div>
+<p><strong>导出成果</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>布局 → 导出为图像</p></li>
+<li><p>选择输出路径和文件名</p></li>
+<li><p>设置分辨率：300dpi（高质量输出）</p></li>
+<li><p>点击”保存”</p></li>
+</ol>
+</div>
+</div>
+<div id="保存地图" class="section level2">
+<h2><img
+src="figures/%E4%B8%89%E5%9C%B0%E5%9B%BE%E4%BF%9D%E5%AD%98.png"
+alt="保存地图" /></h2>
+<p><strong>最后生成的JPG地图的样子（可以和同学们分享啦！）。</strong>老师做课件时间紧，可以做得很难看，意思到位就好。但同学们，还是把地图完善好，再出图哈。</p>
+<div class="float">
+<img src="figures/%E5%B8%83%E5%B1%801.jpg" alt="输出的地图" />
+<div class="figcaption">输出的地图</div>
+</div>
+<hr />
+<div id="六最终保存" class="section level4">
+<h4><strong>六、最终保存</strong></h4>
+<ol style="list-style-type: decimal">
+<li><p>确保所有编辑已保存</p></li>
+<li><p>文件 → 保存项目（Ctrl+S）</p></li>
+</ol>
+<hr />
+</div>
+<div id="七其他" class="section level4">
+<h4><strong>七、其他</strong></h4>
+<p><strong>通用绘图技巧</strong></p>
+<ul>
+<li><p>始终确保捕捉功能开启</p></li>
+<li><p>复杂图形可先画大致轮廓，再用节点工具细化</p></li>
+<li><p>使用Ctrl+Z撤销错误操作</p></li>
+<li><p>定期保存项目（Ctrl+S）</p></li>
+<li><p>每完成一个图层就保存编辑并退出编辑模式</p></li>
+</ul>
+<p>……</p>
+<p><strong>一些提醒</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>每次编辑前</strong>：记得点击”切换编辑”进入编辑模式</p></li>
+<li><p><strong>每次编辑后</strong>：务必点击”保存编辑”保存更改</p></li>
+<li><p><strong>坐标系一致性</strong>：检查所有图层CRS是否为EPSG:4527</p></li>
+<li><p><strong>数据备份</strong>：定期备份整个项目文件夹</p></li>
+</ol>
+<hr />
+</div>
+<div id="回家练习" class="section level3">
+<h3><strong>【回家练习】</strong></h3>
+<p>两个时辰后，你呈上金陵国子监防灾底图。</p>
+<p>监正审视片刻，微微颔首：“虽不及全府之图详备，然楼宇、道路、要害皆备，层次分明，属性周全。更可贵者，已显<strong>图层管理</strong>之思与<strong>图形属性关联</strong>之智。”</p>
+<p>他指向图书馆与档案馆标记：“此处标为防汛重中之重，甚妥。文脉所系，不可有失。”</p>
+<p>“今日你已掌握矢量编辑之基础，虽只绘一学府，然其中’分层管理’、‘属性添加’、’符号化表达’之技，与绘制金陵全图无异。所谓见微知著，便是此理。”</p>
+<p>窗外暮色渐浓，监正收起图卷：“回家后好生练习，巩固今日所学。然’共工之怒’迫在眉睫，明日你需以此图为基，行<strong>空间分析</strong>，划定风险区域——那才是真正的考验。”</p>
+<p>你拱手应诺，心中明白：今日铸就的这块”小基石”，明日将承受”大灾害”的检验。我回去一定再复盘调整，将底图优化变得更好。</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
